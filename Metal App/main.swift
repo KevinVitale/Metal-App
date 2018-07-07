@@ -2,92 +2,80 @@ import AppKit
 import SceneKit.ModelIO
 import MetalKit
 
+// 'RenderingDelegate'
 //------------------------------------------------------------------------------
-let shader = """
-#include <metal_stdlib> \n
-using namespace metal;
+class RenderingDelegate: NSObject, SCNSceneRendererDelegate {
+    private override init() {
+        super.init()
+    }
+    
+    static let shared: RenderingDelegate = .init()
 
-struct VertexIn {
-    float4 position [[ attribute(0) ]];
-};
-
-vertex float4 vertex_main(const VertexIn vertex_in [[ stage_in ]]) {
-    return vertex_in.position;
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let _ = renderer.scene?.rootNode else {
+            return
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval) {
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didApplyConstraintsAtTime time: TimeInterval) {
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+    }
 }
 
-fragment float4 fragment_main() {
-    return float4(1, 0, 0, 1);
-}
-"""
+// 'Bundle' Ext.
 //------------------------------------------------------------------------------
+extension Bundle {
+    final func modelAsset(forName name: String, withExtension extension: String) -> MDLAsset? {
+        guard let url = url(forResource: name, withExtension: `extension`) else {
+            return nil
+        }
+        return MDLAsset(url: url)
+    }
+}
 
+// Create 'addDelegate'
+//------------------------------------------------------------------------------
 let appDelegate = AppDelegate(for: NSApplication.shared)
 
 // Create 'window'
+//------------------------------------------------------------------------------
 let window = Window { MetalViewController() }
 let viewController = window.viewController!
 
-
+// Reference to 'renderer'
+//------------------------------------------------------------------------------
 var renderer: SCNRenderer?
 
+// Update our 'renderer' if 'device' changes
+//------------------------------------------------------------------------------
 viewController.renderer = { device in
+    // If the 'device' changes, re-create our 'renderer'.
     if renderer?.device?.registryID != device.registryID {
-        let scene = renderer?.scene ?? SCNScene(named: "Scenes.scnassets/Scene.scn")
-        renderer = .init(device: device)
-        renderer?.scene = scene
+        let newRenderer      = SCNRenderer(device: device)
+        newRenderer.delegate = renderer?.delegate ?? RenderingDelegate.shared
+        newRenderer.scene    = renderer?.scene ?? SCNScene()
+        renderer             = newRenderer
     }
     return renderer
-    
-    /*
-    if device?.registryID != encoder.device.registryID {
-        device = encoder.device
-        library = try device.makeLibrary(source: shader, options: nil)
-        (vertex, fragment) = (
-            library?.makeFunction(name: "vertex_main")
-            , library?.makeFunction(name: "fragment_main")
-        )
-        
-        let sphere = MDLMesh(
-            sphereWithExtent: [0.5, 0.75, 0.75]
-            , segments: [100, 100]
-            , inwardNormals: false
-            , geometryType: .triangles
-            , allocator: MTKMeshBufferAllocator(device: device))
-        
-        mesh = try MTKMesh(mesh: sphere, device: device)
-        
-        let descriptor = MTLRenderPipelineDescriptor()
-        descriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
-        descriptor.vertexFunction = vertex
-        descriptor.fragmentFunction = fragment
-        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh.vertexDescriptor)
-        
-        pipelineState = try device.makeRenderPipelineState(descriptor: descriptor)
-    }
-    
-    encoder.setRenderPipelineState(pipelineState)
-    encoder.setVertexBuffer(mesh.vertexBuffers[0].buffer, offset: 0, index: 0)
-    
-    guard let submesh = mesh.submeshes.first else {
-        return
-    }
-    
-    encoder.setTriangleFillMode(.lines)
-    encoder.drawIndexedPrimitives(
-        type: .triangle
-        , indexCount: submesh.indexCount
-        , indexType: submesh.indexType
-        , indexBuffer: submesh.indexBuffer.buffer
-        , indexBufferOffset: 0
-    )
-     */
 }
 
-
 // activate `NSApp`
+//------------------------------------------------------------------------------
 NSApp.setActivationPolicy(.regular)
 NSApp.activate(ignoringOtherApps: true)
 
 // run
+//------------------------------------------------------------------------------
 NSApp.run()
 

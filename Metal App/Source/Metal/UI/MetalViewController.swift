@@ -7,7 +7,7 @@ class MetalViewController: NSViewController
     @IBOutlet var delegate: MTKViewDelegate?
     var renderer: ((MTLDevice) throws -> (SCNRenderer?))? = nil
 
-    private(set) var device: Device? {
+    fileprivate var device: Device? {
         didSet {
             set(title: device?.name ?? "")
         }
@@ -15,6 +15,7 @@ class MetalViewController: NSViewController
     
     @IBAction func changeDevice(_ sender: Any?) {
         defer {
+            // Lastly, attach the device to our 'MTKView'.
             device?.attach(to: mtkView, delegate: self.delegate)
         }
         
@@ -53,9 +54,8 @@ class MetalViewDelegate: NSResponder, MTKViewDelegate
             , let renderer = try? viewController.renderer?(cmdBuffer.device) else {
                 return
         }
-        
-        renderer?.render(
-            atTime: renderer?.sceneTime ?? CFAbsoluteTimeGetCurrent()
+
+        renderer?.render(atTime: CFAbsoluteTime()
           , viewport: CGRect(origin: .zero, size: view.drawableSize)
           , commandBuffer: cmdBuffer
           , passDescriptor: descriptor

@@ -5,12 +5,6 @@ import MetalKit
 // 'RenderingDelegate'
 //------------------------------------------------------------------------------
 class RenderingDelegate: NSObject, SCNSceneRendererDelegate {
-    private override init() {
-        super.init()
-    }
-    
-    static let shared: RenderingDelegate = .init()
-
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let _ = renderer.scene?.rootNode else {
             return
@@ -56,6 +50,7 @@ let viewController = window.viewController!
 // Reference to 'renderer'
 //------------------------------------------------------------------------------
 var renderer: SCNRenderer?
+let renderingDelegate = RenderingDelegate()
 
 // Update our 'renderer' if 'device' changes
 //------------------------------------------------------------------------------
@@ -63,8 +58,8 @@ viewController.renderer = { device in
     // If the 'device' changes, re-create our 'renderer'.
     if renderer?.device?.registryID != device.registryID {
         let newRenderer      = SCNRenderer(device: device)
-        newRenderer.delegate = renderer?.delegate ?? RenderingDelegate.shared
-        newRenderer.scene    = renderer?.scene ?? SCNScene()
+        newRenderer.delegate = renderer?.delegate ?? renderingDelegate
+        newRenderer.scene    = renderer?.scene ?? SCNScene(named: "Scenes.scnassets/Scene.scn")
         renderer             = newRenderer
     }
     return renderer

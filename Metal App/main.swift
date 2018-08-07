@@ -1,31 +1,5 @@
 import AppKit
-import SceneKit.ModelIO
-import MetalKit
-
-// 'RenderingDelegate'
-//------------------------------------------------------------------------------
-class RenderingDelegate: NSObject, SCNSceneRendererDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard let _ = renderer.scene?.rootNode else {
-            return
-        }
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval) {
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didApplyConstraintsAtTime time: TimeInterval) {
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
-    }
-}
+import SceneKit
 
 // Create 'addDelegate'
 //------------------------------------------------------------------------------

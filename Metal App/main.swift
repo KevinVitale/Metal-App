@@ -27,17 +27,6 @@ class RenderingDelegate: NSObject, SCNSceneRendererDelegate {
     }
 }
 
-// 'Bundle' Ext.
-//------------------------------------------------------------------------------
-extension Bundle {
-    final func modelAsset(forName name: String, withExtension extension: String) -> MDLAsset? {
-        guard let url = url(forResource: name, withExtension: `extension`) else {
-            return nil
-        }
-        return MDLAsset(url: url)
-    }
-}
-
 // Create 'addDelegate'
 //------------------------------------------------------------------------------
 let appDelegate = AppDelegate(for: NSApplication.shared)

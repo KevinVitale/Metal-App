@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0DDC4B211A0B7E003CFADF /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DDC4A211A0B7E003CFADF /* Bundle+Ext.swift */; };
 		0A8BBE7920E96DF40054B568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BBE7820E96DF40054B568 /* AppDelegate.swift */; };
 		0A8BBE7B20E96F790054B568 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BBE7A20E96F790054B568 /* Window.swift */; };
 		0A99011F20E1808C00EEF20C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99011E20E1808C00EEF20C /* Device.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0DDC4A211A0B7E003CFADF /* Bundle+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Ext.swift"; sourceTree = "<group>"; };
 		0A8BBE7820E96DF40054B568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8BBE7A20E96F790054B568 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		0A99010920E165DD00EEF20C /* Metal App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 		0ABB00C720E97AE5008AC017 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
+				0A0DDC4A211A0B7E003CFADF /* Bundle+Ext.swift */,
 				0A99011E20E1808C00EEF20C /* Device.swift */,
 				0AB4072420E9C14F000682FB /* DeviceQuery.swift */,
 			);
@@ -187,6 +190,7 @@
 				0AB4072520E9C14F000682FB /* DeviceQuery.swift in Sources */,
 				0A99011F20E1808C00EEF20C /* Device.swift in Sources */,
 				0A8BBE7920E96DF40054B568 /* AppDelegate.swift in Sources */,
+				0A0DDC4B211A0B7E003CFADF /* Bundle+Ext.swift in Sources */,
 				0ABA815C20E403F9000F6AD7 /* main.swift in Sources */,
 				0A8BBE7B20E96F790054B568 /* Window.swift in Sources */,
 			);

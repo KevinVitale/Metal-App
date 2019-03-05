@@ -16,7 +16,7 @@ class MetalViewController: NSViewController
     @IBAction func changeDevice(_ sender: Any?) {
         defer {
             // Lastly, attach the device to our 'MTKView'.
-            device?.attach(to: mtkView, delegate: self.delegate)
+            device?.attach(to: mtkView, delegate: delegate)
         }
         
         guard let registryID = device?.registryID

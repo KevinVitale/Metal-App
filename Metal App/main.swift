@@ -28,11 +28,6 @@ viewController.renderer = { device in
     return renderer
 }
 
-// activate `NSApp`
-//------------------------------------------------------------------------------
-NSApp.setActivationPolicy(.regular)
-NSApp.activate(ignoringOtherApps: true)
-
 // run
 //------------------------------------------------------------------------------
 NSApp.run()

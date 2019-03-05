@@ -45,12 +45,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A56F126212DB6E70038E6E9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0A8BBE7820E96DF40054B568 /* AppDelegate.swift */,
+				0A8BBE7A20E96F790054B568 /* Window.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		0A8BBE7720E96DDE0054B568 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				0ABB00C520E97AD0008AC017 /* Metal */,
-				0A8BBE7820E96DF40054B568 /* AppDelegate.swift */,
-				0A8BBE7A20E96F790054B568 /* Window.swift */,
+				0A56F126212DB6E70038E6E9 /* App */,
 			);
 			path = Source;
 			sourceTree = "<group>";
